@@ -64,6 +64,13 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+// Testing Route
+app.use("/test", (req,res)=>{
+  res.status(200).json({
+    message:"APIs are ON"
+  })
+});
+
 // Routes
 app.use("/api", authRouter);
 app.use("/api/user", usersRouter);
