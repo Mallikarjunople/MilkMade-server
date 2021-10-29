@@ -4,28 +4,28 @@ const path = require("path");
 
 class Product {
   // Delete Image from uploads -> products folder
-  static deleteImages(images, mode) {
-    var basePath =
-      path.resolve(__dirname + "../../") + "/public/uploads/products/";
-    console.log(basePath);
-    for (var i = 0; i < images.length; i++) {
-      let filePath = "";
-      if (mode == "file") {
-        filePath = basePath + `${images[i].filename}`;
-      } else {
-        filePath = basePath + `${images[i]}`;
-      }
-      console.log(filePath);
-      if (fs.existsSync(filePath)) {
-        console.log("Exists image");
-      }
-      fs.unlink(filePath, (err) => {
-        if (err) {
-          return err;
-        }
-      });
-    }
-  }
+  // static deleteImages(images, mode) {
+  //   var basePath =
+  //     path.resolve(__dirname + "../../") + "/public/uploads/products/";
+  //   console.log(basePath);
+  //   for (var i = 0; i < images.length; i++) {
+  //     let filePath = "";
+  //     if (mode == "file") {
+  //       filePath = basePath + `${images[i].filename}`;
+  //     } else {
+  //       filePath = basePath + `${images[i]}`;
+  //     }
+  //     console.log(filePath);
+  //     if (fs.existsSync(filePath)) {
+  //       console.log("Exists image");
+  //     }
+  //     fs.unlink(filePath, (err) => {
+  //       if (err) {
+  //         return err;
+  //       }
+  //     });
+  //   }
+  // }
 
   async getAllProduct(req, res) {
     try {
@@ -46,6 +46,7 @@ class Product {
       pName,
       pDescription,
       pPrice,
+      pImage,
       pQuantity,
       pCategory,
       pOffer,
@@ -58,23 +59,22 @@ class Product {
     // console.log("working");
     // console.log(parsedVariant.length);
 
-    let images = req.files;
+  
     // Validation
     if (
       !pName |
       !pDescription |
       !pPrice |
+      !pImage |
       !pQuantity |
       !pCategory |
       !pOffer |
       !pStatus
     ) {
-      Product.deleteImages(images, "file");
       return res.json({ error: "All filled must be required" });
     }
     // Validate Name and description
     else if (pName.length > 255 || pDescription.length > 4000) {
-      Product.deleteImages(images, "file");
       return res.json({
         error: "Name 255 & Description must not be 4000 charecter long",
       });
@@ -87,7 +87,7 @@ class Product {
     else {
       try {
         let allImages = [];
-        for (const img of images) {
+        for (const img of pImage) {
           allImages.push(img.filename);
         }
 

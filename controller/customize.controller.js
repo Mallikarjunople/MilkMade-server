@@ -18,13 +18,13 @@ class Customize {
   }
 
   async uploadSlideImage(req, res) {
-    let image = req.file.filename;
-    if (!image) {
+    let url = req.body.url;
+    if (!url) {
       return res.json({ error: "All field required" });
     }
     try {
       let newCustomzie = new customizeModel({
-        slideImage: image,
+        slideImage: url,
       });
       let save = await newCustomzie.save();
       if (save) {
