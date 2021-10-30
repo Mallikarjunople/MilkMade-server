@@ -72,7 +72,12 @@ app.use("/test", (req,res)=>{
 });
 
 // Routes
-app.use("/api", authRouter);
+ // User Auth
+ app.use("/api", authRouter);
+ 
+// Admin auth
+app.use("/api/admin", adminRouter);
+
 app.use("/api/user", usersRouter);
 app.use("/api/category", categoryRouter);
 app.use("/api/product", productRouter);
@@ -84,7 +89,6 @@ app.use("/api/delboy", delboyRouter);
 app.use("/api/customize", customizeRouter);
 app.use("/api/cart", cartRouter);
 app.use("/api/address", addressRouter);
-app.use("/api/admin", adminRouter);
 
 // Run Server
 const PORT = process.env.PORT || 8000;
