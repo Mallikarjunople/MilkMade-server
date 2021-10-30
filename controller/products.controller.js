@@ -88,7 +88,7 @@ class Product {
       try {
         let allImages = [];
         for (const img of pImage) {
-          allImages.push(img.filename);
+          allImages.push(img);
         }
 
         let i = 0;
