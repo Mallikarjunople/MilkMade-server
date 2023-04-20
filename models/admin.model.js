@@ -46,5 +46,7 @@ const adminSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const adminModel = mongoose.model("adminmodel", adminSchema);
+// Need to specify db for some unknown reason
+const myDB = mongoose.connection.useDb("milkwaledb");
+const adminModel = myDB.model("adminmodel", adminSchema);
 module.exports = adminModel;
