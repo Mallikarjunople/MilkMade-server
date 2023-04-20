@@ -55,5 +55,7 @@ const orderSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const orderModel = mongoose.model("orders", orderSchema);
+// Need to specify db for some unknown reason
+const myDB = mongoose.connection.useDb("milkwaledb");
+const orderModel = myDB.model("orders", orderSchema);
 module.exports = orderModel;
