@@ -58,5 +58,7 @@ const subpackSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const subpackModel = mongoose.model("subpacks", subpackSchema);
+// Need to specify db for some unknown reason
+const myDB = mongoose.connection.useDb("milkwaledb");
+const subpackModel = myDB.model("subpacks", subpackSchema);
 module.exports = subpackModel;

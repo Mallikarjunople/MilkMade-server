@@ -53,5 +53,7 @@ const subscriptionSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const subscriptionModel = mongoose.model("subscription", subscriptionSchema);
+// Need to specify db for some unknown reason
+const myDB = mongoose.connection.useDb("milkwaledb");
+const subscriptionModel = myDB.model("subscription", subscriptionSchema);
 module.exports = subscriptionModel;

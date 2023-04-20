@@ -31,5 +31,7 @@ const delboySchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const delboyModel = mongoose.model("delboy", delboySchema);
+// Need to specify db for some unknown reason
+const myDB = mongoose.connection.useDb("milkwaledb");
+const delboyModel = myDB.model("delboy", delboySchema);
 module.exports = delboyModel;
