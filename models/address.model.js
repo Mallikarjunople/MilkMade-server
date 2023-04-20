@@ -38,5 +38,7 @@ const userAddressSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-mongoose.model("address", addressSchema);
-module.exports = mongoose.model("userAddress", userAddressSchema);
+// Need to specify db for some unknown reason
+const myDB = mongoose.connection.useDb("milkwaledb");
+myDB.model("address", addressSchema);
+module.exports = myDB.model("userAddress", userAddressSchema);
