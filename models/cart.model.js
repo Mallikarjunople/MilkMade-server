@@ -28,4 +28,6 @@ const cartSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("cart", cartSchema);
+// Need to specify db for some unknown reason
+const myDB = mongoose.connection.useDb("milkwaledb");
+module.exports = myDB.model("cart", cartSchema);
