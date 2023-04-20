@@ -50,5 +50,7 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const userModel = mongoose.model("users", userSchema);
+// Need to specify db for some unknown reason
+const myDB = mongoose.connection.useDb("milkwaledb");
+const userModel = myDB.model("users", userSchema);
 module.exports = userModel;
